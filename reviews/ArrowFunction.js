@@ -6,6 +6,7 @@ function BasicDeclaration() {
     // old ways in defining js function, this looks a lot of java
 }
 
+// ARROW FUNCTION
 const BasicDeclaration1 = () => {
     console.log("arrow functions with const");
 }
@@ -15,6 +16,10 @@ BasicDeclaration1()
 export default function BasicDeclarationExport() {
     console.log("butngan pala export for usage sa other HAHAAH");
     // exporting...
+}
+
+export const BasicDeclaration1Export = () => {
+    console.log("mao daw ni lamang sa const, sa exporting")
 }
 
 // DIFF BETWEEN VAR, LET, CONST
@@ -51,8 +56,9 @@ const PI = 3.14159;
 
 // PI = 3.14; // Error
 
-// However, objects and arrays declared with const can still have their contents changed:
+// However, OBJECTS and arrays declared with const can still have their contents changed:
 
+// OBJECT
 const person = {
     name: "Ryan"
 };
@@ -63,7 +69,9 @@ console.log(person.name); // Jay
 
 // What is forbidden is:
 
-// person = {}; // Error
+// person = {
+//     name = "changing const"
+// }; // Error
 
 // const → value should not be reassigned. block
 // let → value will change. block
