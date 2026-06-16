@@ -1,0 +1,24 @@
+| Syntax                                      | What it Does                                        |
+| ------------------------------------------- | --------------------------------------------------- |
+| `document.getElementById(id)`               | Finds an HTML element by its `id`.                  |
+| `document.querySelector(selector)`          | Finds the first element matching a CSS selector.    |
+| `document.querySelectorAll(selector)`       | Finds all matching elements and returns a NodeList. |
+| `element.textContent`                       | Gets or sets the text inside an element.            |
+| `element.innerHTML`                         | Gets or sets the HTML inside an element.            |
+| `element.value`                             | Gets or sets the value of an input field.           |
+| `document.createElement(tag)`               | Creates a new HTML element.                         |
+| `parent.appendChild(child)`                 | Adds an element inside another element.             |
+| `parent.removeChild(child)`                 | Removes a child element.                            |
+| `element.remove()`                          | Removes the element itself.                         |
+| `element.setAttribute(name, value)`         | Adds or changes an HTML attribute.                  |
+| `element.getAttribute(name)`                | Gets an attribute value.                            |
+| `element.classList.add(class)`              | Adds a CSS class.                                   |
+| `element.classList.remove(class)`           | Removes a CSS class.                                |
+| `element.classList.toggle(class)`           | Adds/removes a class automatically.                 |
+| `element.style.property`                    | Changes inline CSS styles.                          |
+| `element.addEventListener(event, callback)` | Runs code when an event happens.                    |
+| `document.forms`                            | Accesses all forms on the page.                     |
+| `document.title`                            | Gets or sets the page title.                        |
+| `alert(message)`                            | Shows a popup message.                              |
+| `confirm(message)`                          | Shows OK/Cancel popup.                              |
+| `prompt(message)`                           | Gets text input from user.                          |
