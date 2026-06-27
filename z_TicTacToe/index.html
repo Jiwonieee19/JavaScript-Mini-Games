@@ -3,9 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TicTacToe</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    
+    <h1>NOT CONFIDENT PA SA JS SO LETS MAKE THIS IN HTML-CSS ONLY</h1>
+    <div class="table">
+        <div class="row">
+            <div class="column" id="r1c1"></div>
+            <div class="column" id="r1c2"></div>
+            <div class="column" id="r1c3"></div>
+        </div>
+        <div class="row">
+            <div class="column" id="r2c1"></div>
+            <div class="column" id="r2c2"></div>
+            <div class="column" id="r2c3"></div>
+        </div>
+        <div class="row">
+            <div class="column" id="r3c1"></div>
+            <div class="column" id="r3c2"></div>
+            <div class="column" id="r3c3"></div>
+        </div>
+    </div>
+    <p>bobo wla daay logic sa html-css pang handle ug function so mag js nata</p>
 </body>
+
+<script>
+    if (id="r1c2") {
+        console.log("HA")
+        // need daay nakog listener 
+    }
+
+    const r1c1 = getElemenentById("r1c1");
+
+    r1c1.addEventListener("click", function changeColor() {
+        r1c1.style.backgroundColor = "blue"
+    })
+
+    const boxes = document.querySelectorAll(".column")
+
+    boxes.forEach( function(box) {
+        box.style.backgroundColor = "green";
+        box.addEventListener("click", function() {
+            box.style.backgroundColor = "red";
+        })
+    })
+</script>
+
 </html>
