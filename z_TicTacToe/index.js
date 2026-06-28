@@ -40,8 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
     table.addEventListener('click', (event) => {
         const cell = event.target.closest('.column')
         if (!cell) return
+        // in this return line, it means nga if ang click isnt in .column, nothing happens
 
         const index = Number(cell.dataset.index)
+        // dataset is the API bridge to all data- attributes
+        // (data-index → dataset.index, data-player-name → dataset.playerName).
+        // The part after data- is your choice, but the data- prefix is the spec.
         handleCellClick(index, cell)
     })
 })
@@ -57,8 +61,11 @@ function handleCellClick(index, cellElement) {
 
     // Update state first, then reflect in the DOM
     // (state is the source of truth – DOM is just a view)
-    board[index] = color
-    cellElement.style.backgroundColor = color
+    board[index] = color // state
+    cellElement.style.backgroundColor = color // DOM
+    // If you ever need to know what's in a cell, you read board[index], 
+    // never cellElement.style.backgroundColor. This way your logic doesn't 
+    // depend on the DOM (which is slow and inconsistent across browsers).
 
     // Check for a winner AFTER the move
     const winColor = checkWin()
@@ -73,7 +80,8 @@ function handleCellClick(index, cellElement) {
 
     // Check for draw – board.every() runs the callback on every element
     // and returns true ONLY if every element passes the test
-    if (board.every(cell => cell !== null)) {
+    if (board.every(cell => cell !== null)) { // DRAW IF WLA NAG TRUE ANG WIN THEN NO BOX NA
+        //  .every() ONLY returns true IF every single element passes
         gameOver = true
         winnerDisplay.textContent = 'DRAW!'
         console.log('Draw')
@@ -90,7 +98,7 @@ function checkWin() {
         if (board[a] !== null && board[a] === board[b] && board[a] === board[c]) {
             return board[a]     // returns 'blue' or 'red'
         }
-    }
+    } // mao daay ni true power ni destructuring
     return null
 }
 
