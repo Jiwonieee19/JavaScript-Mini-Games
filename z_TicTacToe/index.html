@@ -31,19 +31,36 @@
 <script>
     const boxes = document.querySelectorAll(".column")
     let available = 9;
+    let color = "";
+    let changer = 0;
 
-    boxes.forEach( function(box) {
+    boxes.forEach( box => {
         box.addEventListener("click", function() {
-            box.style.backgroundColor = "red";
-            available = available - 1;
+            color = changer === 0 ? "blue" : "red";
+            changer = 1 - changer //flips 1 and 0
+           box.style.backgroundColor = color;
+            available--
             // so dli kada frame magload gni, pag page reload lang
             // gihimo sd natog timer() gaina
             if (available === 0) {
-                console.log("letsee")
+                   console.log("letsee")
                 checkWinner();
             }
         })
     })
+
+    // function cycle() { // dont need timeout in tictactoe
+    //         color = changer === 0 ? "blue" : "red";
+    //         // dara pang frame
+    //         if (color === "blue") {
+    //             changer = 1;
+    //         } else {
+    //             changer = 0;
+    //         };
+    //         setTimeout(cycle, 5)
+    // }
+
+    // cycle()
 
     const checkWinner = () => {
         console.log("hatdog")
