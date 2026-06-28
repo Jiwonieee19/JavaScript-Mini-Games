@@ -21,7 +21,7 @@
         </div>
         <div class="row">
             <div class="column" id="r3c1"></div>
-            <div class="column" id="r3c2"></div>
+            <div class="column" id= "r3c2"></div>
             <div class="column" id="r3c3"></div>
         </div>
     </div>
@@ -29,25 +29,27 @@
 </body>
 
 <script>
-    if (id="r1c2") {
-        console.log("HA")
-        // need daay nakog listener 
-    }
-
-    const r1c1 = getElemenentById("r1c1");
-
-    r1c1.addEventListener("click", function changeColor() {
-        r1c1.style.backgroundColor = "blue"
-    })
-
     const boxes = document.querySelectorAll(".column")
+    let available = 9;
 
     boxes.forEach( function(box) {
-        box.style.backgroundColor = "green";
         box.addEventListener("click", function() {
             box.style.backgroundColor = "red";
+            available = available - 1;
+            // so dli kada frame magload gni, pag page reload lang
+            // gihimo sd natog timer() gaina
+            if (available === 0) {
+                console.log("letsee")
+                checkWinner();
+            }
         })
     })
+
+    const checkWinner = () => {
+        console.log("hatdog")
+    }
+    
+            
 </script>
 
 </html>

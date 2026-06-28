@@ -1,0 +1,21 @@
+.table {
+    display: block;
+    column-gap: 5px;
+    row-gap: 5px;
+    /* background-color: aqua; */
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.column {
+    display: flex;
+    width: 150px;
+    height: 150px;
+    /* background-color: black; */
+    border: solid 3px black;
+    border-radius: 10px;
+    margin: 10px;
+}

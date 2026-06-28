@@ -1,3 +1,5 @@
+DOM
+
 | Syntax                                      | What it Does                                        |
 | ------------------------------------------- | --------------------------------------------------- |
 | `document.getElementById(id)`               | Finds an HTML element by its `id`.                  |
@@ -22,3 +24,13 @@
 | `alert(message)`                            | Shows a popup message.                              |
 | `confirm(message)`                          | Shows OK/Cancel popup.                              |
 | `prompt(message)`                           | Gets text input from user.                          |
+
+
+RANDOM NOTES
+Yes, basically all standard CSS properties work with .style in JS. Multi-word properties use camelCase:
+- background-color → backgroundColor
+- font-size → fontSize
+- margin-left → marginLeft
+- border-radius → borderRadius
+Single-word ones stay the same: color, width, height, display, etc.
+The only exceptions are vendor-prefixed properties like -webkit-transform, which become WebkitTransform (capital W).
