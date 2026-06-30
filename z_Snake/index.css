@@ -1,0 +1,24 @@
+div {
+    display: flex;
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    background-color: aqua;
+    border: solid black 1px;
+}
+
+.head {
+    background-color: rgb(140, 140, 255);
+    top: 100px;
+    left: 100px;
+}
+
+#no1 {
+    top: 120px;
+    left: 100px;
+}
+
+#no2 {
+    top: 140px;
+    left: 100px;
+}

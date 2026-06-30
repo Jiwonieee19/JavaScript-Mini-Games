@@ -7,6 +7,58 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    
+    <li class="list">
+        <div class="head"></div>
+        <div class="body" id="no1"></div>
+        <div class="body" id="no2"></div>
+    </li>
 </body>
+    <script>
+        const list = document.querySelector(".list")
+        const head = document.querySelector(".head")
+        let velocity = 0
+        let current = 0
+        let one = document.getElementById("no1")
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowUp") {
+                velocity = 20
+                move(velocity, "y")
+            }
+        });
+
+        const move = (velocity, coordinates) => {
+            coordinates === "x" ? coordinates = "top" : coordinates = "left"
+            console.log(coordinates)
+            current = parseInt(getComputedStyle(head)[coordinates])
+            // let current = parseInt(hed.style.top) || 0 // returns inline "top=100px"
+            bodyFirst(current, coordinates)
+            // WHY MINUS? X AND Y WORKS DIFFERENT HERE, SINCE IN JAVASWING, WE HAVE VELOCITY/POSITION,
+            // HERE ONLY MARGIN THINGS, SO THE TOP AND LEFT STARTED IN 0, NEGATIVE OVERPASS THE SCREEN
+            head.style[coordinates] = (current - velocity) + "px";
+            console.log(current)
+            console.log(velocity)
+            console.log(current - velocity)
+        };
+
+        const bodyFirst = (currrent, coordinates) => {
+            // forloop ang body then update it first before mo move si head
+            console.log("naas body " + current + " and coor: " + coordinates)
+            if (one === document.getElementById("no1")) {
+                one.style[coordinates] = current + "px"
+                // TODO: Actually need dyud daay si x and y, since if left, 
+                // kuhaon niya ang left ni head which is same ra saiya so mura siyag wla nilihok
+                // clever, my og approach is one.style.coordinates plus no "" in line 43
+            } else {
+
+            }
+        }
+    </script>
 </html>
+
+<!-- The key event isn't working because keydown on a <div> only fires if the element is focusable. A plain <div> (head) cannot receive focus, so the event never triggers.
+Two problems:
+1. No tabindex — the <div class="head"> needs tabindex="0" to be focusable.
+2. No initial focus — even if tabindex is added, you need head.focus() to give it focus.
+Either add tabindex="0" + head.focus(), or better — move the listener to document so it catches keyboard input universally:
+document.addEventListener('keydown', (event) => { ... }) -->
