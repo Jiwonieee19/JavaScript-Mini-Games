@@ -11,6 +11,7 @@
         <div class="head"></div>
         <div class="body" id="no1"></div>
         <div class="body" id="no2"></div>
+        <div class="body" id="no3"></div>
     </li>
 </body>
     <script>
@@ -21,22 +22,49 @@
         let current = 0
         let currentSub = 0
         let subcoordinates = ""
+        let bodyCount = document.querySelectorAll(".body")
+        let prevMove = "" // stopper for overlap body move
+        let xy = "" // pang continue if idle
+        let moving = false
 
-        document.addEventListener("keydown", (event) => {
-            if (event.key === "ArrowUp") {
+        console.log(bodyCount.length)
+
+        setInterval(
+            document.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowUp" && prevMove !== "down") {
                 velocity = 20
-                move(velocity, "x")
-            } else if (event.key === "ArrowDown") {
+                prevMove = "up"
+                // move(velocity, "x")
+                xy = "x"
+                if (!moving) startGame()
+            } else if (event.key === "ArrowDown" && prevMove !== "up") {
                 velocity = -20
-                move(velocity, "x")
-            } else if (event.key === "ArrowLeft") {
+                prevMove = "down"
+                // move(velocity, "x")
+                xy = "x"
+                if (!moving) startGame()
+            } else if (event.key === "ArrowLeft" && prevMove !== "right") {
                 velocity = 20
-                move(velocity, "y")
-            } else if (event.key === "ArrowRight") {
+                prevMove = "left"
+                // move(velocity, "y")
+                xy = "y"
+                if (!moving) startGame()
+            } else if (event.key === "ArrowRight" && prevMove !== "left") {
                 velocity = -20
-                move(velocity, "y")
+                prevMove = "right"
+                // move(velocity, "y")
+                xy = "y"
+                if (!moving) startGame()
             }
-        });
+        }), 200
+        );
+
+        function startGame() {
+            moving = true
+            setInterval(() => {
+                move(velocity,xy)
+            }, 200)
+        }
 
         const move = (velocity, coordinates) => {
             // coordinates === "x" ? coordinates = "top" : coordinates = "left"
@@ -61,6 +89,14 @@
         };
 
         const bodyFirst = (currrent, coordinates, currentSub) => {
+
+            for (let i = bodyCount.length; i > 1; i--) {
+                let nextBody = document.getElementById("no"+i)
+                let behindBody = document.getElementById("no"+(i-1))
+                nextBody.style.top = getComputedStyle(behindBody).top
+                nextBody.style.left = getComputedStyle(behindBody).left
+            }
+
             // forloop ang body then update it first before mo move si head
             console.log("naas body " + current + " and coor: " + coordinates)
             if (one === document.getElementById("no1")) {
@@ -70,7 +106,7 @@
                 // kuhaon niya ang left ni head which is same ra saiya so mura siyag wla nilihok
                 // clever, my og approach is one.style.coordinates plus no "" in line 43
             }
-            
+
         }
     </script>
 </html>
@@ -81,3 +117,6 @@ Two problems:
 2. No initial focus — even if tabindex is added, you need head.focus() to give it focus.
 Either add tabindex="0" + head.focus(), or better — move the listener to document so it catches keyboard input universally:
 document.addEventListener('keydown', (event) => { ... }) -->
+
+<!-- Summary: .style = only the style="" attribute on the element itself. It's for setting (and reading what you've set inline). 
+getComputedStyle = the final rendered value after all CSS sources are merged. -->
