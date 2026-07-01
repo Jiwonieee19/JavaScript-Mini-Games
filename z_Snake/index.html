@@ -8,6 +8,7 @@
 </head>
 <body>
     <p class="over" id="hide">GAME OVER</p>
+    <div class="food"></div>
     <li class="list">
         <div class="head"></div>
         <div class="body" id="no1"></div>
@@ -28,6 +29,7 @@
         let xy = "" // pang continue if idle
         let moving = false
         let gameLoop = ""
+        const food = document.querySelector(".food")
 
         console.log(bodyCount.length)
 
@@ -66,6 +68,7 @@
             gameLoop = setInterval(() => {
                 move(velocity,xy)
                 gameOverChecker()
+                foodCollision()
                 console.log("Parse: " + parseInt(getComputedStyle(head).top) + " CurrentHeight: " + window.innerHeight)
             }, 200)
         };
@@ -86,8 +89,30 @@
                 }
         };
 
-        function foodProduce() {
-            
+        function foodRelocate() {
+            if (foodCollision()) {
+
+            } else {
+
+            }
+        }
+
+        function foodCollision() {
+            const headStyle = getComputedStyle(head)
+            const foodStyle = getComputedStyle(food)
+            const headTop = parseInt(headStyle.top)
+            const headLeft = parseInt(headStyle.left)
+            const headBottom = headTop + parseInt(headStyle.height)
+            const headRight = headLeft + parseInt(headStyle.width)
+            const foodTop = parseInt(foodStyle.top)
+            const foodLeft = parseInt(foodStyle.left)
+            const foodBottom = foodTop + parseInt(foodStyle.height)
+            const foodRight = foodLeft + parseInt(foodStyle.width)
+
+            if (headBottom > foodTop && headTop < foodBottom && headRight > foodLeft && headLeft < foodRight) {
+                console.log("YAWAAAAAA")
+                clearInterval(gameLoop)
+            }
         }
 
         const move = (velocity, coordinates) => {

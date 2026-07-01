@@ -34,3 +34,13 @@ div {
     display: none;
     z-index: 10;
 }
+
+.food {
+    display: flex;
+    position: absolute;
+    background-color: yellow;
+    height: 20px;
+    width: 20px;
+    top: 50px;
+    left: 50px;
+}
