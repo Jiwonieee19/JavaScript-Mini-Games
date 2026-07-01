@@ -16,23 +16,42 @@
     <script>
         const list = document.querySelector(".list")
         const head = document.querySelector(".head")
+        let one = document.getElementById("no1")
         let velocity = 0
         let current = 0
-        let one = document.getElementById("no1")
+        let currentSub = 0
+        let subcoordinates = ""
 
         document.addEventListener("keydown", (event) => {
             if (event.key === "ArrowUp") {
                 velocity = 20
+                move(velocity, "x")
+            } else if (event.key === "ArrowDown") {
+                velocity = -20
+                move(velocity, "x")
+            } else if (event.key === "ArrowLeft") {
+                velocity = 20
+                move(velocity, "y")
+            } else if (event.key === "ArrowRight") {
+                velocity = -20
                 move(velocity, "y")
             }
         });
 
         const move = (velocity, coordinates) => {
-            coordinates === "x" ? coordinates = "top" : coordinates = "left"
+            // coordinates === "x" ? coordinates = "top" : coordinates = "left"
+            if (coordinates === "x") {
+                coordinates = "top"
+                subcoordinates = "left"
+            } else {
+                coordinates = "left"
+                subcoordinates = "top"
+            }
             console.log(coordinates)
             current = parseInt(getComputedStyle(head)[coordinates])
+            currentSub = parseInt(getComputedStyle(head)[subcoordinates]) // ma change na sa value dria ang sub nga x/y
             // let current = parseInt(hed.style.top) || 0 // returns inline "top=100px"
-            bodyFirst(current, coordinates)
+            bodyFirst(current, coordinates, currentSub)
             // WHY MINUS? X AND Y WORKS DIFFERENT HERE, SINCE IN JAVASWING, WE HAVE VELOCITY/POSITION,
             // HERE ONLY MARGIN THINGS, SO THE TOP AND LEFT STARTED IN 0, NEGATIVE OVERPASS THE SCREEN
             head.style[coordinates] = (current - velocity) + "px";
@@ -41,17 +60,17 @@
             console.log(current - velocity)
         };
 
-        const bodyFirst = (currrent, coordinates) => {
+        const bodyFirst = (currrent, coordinates, currentSub) => {
             // forloop ang body then update it first before mo move si head
             console.log("naas body " + current + " and coor: " + coordinates)
             if (one === document.getElementById("no1")) {
                 one.style[coordinates] = current + "px"
+                one.style[subcoordinates] = currentSub + "px"
                 // TODO: Actually need dyud daay si x and y, since if left, 
                 // kuhaon niya ang left ni head which is same ra saiya so mura siyag wla nilihok
                 // clever, my og approach is one.style.coordinates plus no "" in line 43
-            } else {
-
             }
+            
         }
     </script>
 </html>
