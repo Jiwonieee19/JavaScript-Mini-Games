@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
+    <p class="over" id="hide">GAME OVER</p>
     <li class="list">
         <div class="head"></div>
         <div class="body" id="no1"></div>
@@ -23,9 +24,10 @@
         let currentSub = 0
         let subcoordinates = ""
         let bodyCount = document.querySelectorAll(".body")
-        let prevMove = "" // stopper for overlap body move
+        let prevMove = "up" // stopper for overlap body move
         let xy = "" // pang continue if idle
         let moving = false
+        let gameLoop = ""
 
         console.log(bodyCount.length)
 
@@ -61,9 +63,31 @@
 
         function startGame() {
             moving = true
-            setInterval(() => {
+            gameLoop = setInterval(() => {
                 move(velocity,xy)
+                gameOverChecker()
+                console.log("Parse: " + parseInt(getComputedStyle(head).top) + " CurrentHeight: " + window.innerHeight)
             }, 200)
+        };
+
+        function gameOverChecker() {
+            if (xy === "x" && 
+                (parseInt(getComputedStyle(head).top) > window.innerHeight 
+                || parseInt(getComputedStyle(head).top) < 0)) {
+                    console.log("GAME OVER")
+                    clearInterval(gameLoop) // ends the interval
+                    document.getElementById("hide").style.display = "flex"
+                } else if (xy === "y" && 
+                (parseInt(getComputedStyle(head).left) > window.innerWidth
+                || parseInt(getComputedStyle(head).left) < 0)) {
+                    console.log("GAME OVER")
+                    clearInterval(gameLoop) // ends the interval
+                    document.getElementById("hide").style.display = "flex"
+                }
+        };
+
+        function foodProduce() {
+            
         }
 
         const move = (velocity, coordinates) => {
