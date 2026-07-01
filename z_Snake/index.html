@@ -8,6 +8,7 @@
 </head>
 <body>
     <p class="over" id="hide">GAME OVER</p>
+    <p class="score">TOTAL SCORE: 0</p>
     <div class="food"></div>
     <li class="list">
         <div class="head"></div>
@@ -30,6 +31,7 @@
         let moving = false
         let gameLoop = ""
         const food = document.querySelector(".food")
+        let score = 0
 
         console.log(bodyCount.length)
 
@@ -68,7 +70,7 @@
             gameLoop = setInterval(() => {
                 move(velocity,xy)
                 gameOverChecker()
-                foodCollision()
+                foodFunction()
                 console.log("Parse: " + parseInt(getComputedStyle(head).top) + " CurrentHeight: " + window.innerHeight)
             }, 200)
         };
@@ -89,11 +91,12 @@
                 }
         };
 
-        function foodRelocate() {
+        function foodFunction() {
             if (foodCollision()) {
-
-            } else {
-
+                score += 10
+                document.querySelector(".score").textContent = "TOTAL SCORE: " + score
+                // addBody()
+                rePositionFood()
             }
         }
 
@@ -109,10 +112,23 @@
             const foodBottom = foodTop + parseInt(foodStyle.height)
             const foodRight = foodLeft + parseInt(foodStyle.width)
 
-            if (headBottom > foodTop && headTop < foodBottom && headRight > foodLeft && headLeft < foodRight) {
-                console.log("YAWAAAAAA")
-                clearInterval(gameLoop)
-            }
+            return headBottom > foodTop && headTop < foodBottom && headRight > foodLeft && headLeft < foodRight
+            // if (headBottom > foodTop && headTop < foodBottom && headRight > foodLeft && headLeft < foodRight) {
+            //     console.log("YAWAAAAAA")
+            //     clearInterval(gameLoop)
+            // }
+        }
+
+        function rePositionFood() {
+            const newTop = MinMax(0, window.innerHeight)
+            const newLeft = MinMax(0, window.innerWidth)
+            console.log("New Coordinates: " + newTop + " " + newLeft)
+            food.style.top = newTop + "px"
+            food.style.left = newLeft + "px"
+        }
+
+        const MinMax = (min, max) => {
+            return Math.ceil(Math.random() * (max - min + 1) + min)
         }
 
         const move = (velocity, coordinates) => {
