@@ -32,6 +32,7 @@
         let gameLoop = ""
         const food = document.querySelector(".food")
         let score = 0
+        let bodyCountSeparate = 3
 
         console.log(bodyCount.length)
 
@@ -95,7 +96,7 @@
             if (foodCollision()) {
                 score += 10
                 document.querySelector(".score").textContent = "TOTAL SCORE: " + score
-                // addBody()
+                addBody()
                 rePositionFood()
             }
         }
@@ -117,6 +118,17 @@
             //     console.log("YAWAAAAAA")
             //     clearInterval(gameLoop)
             // }
+        }
+
+        function addBody() {
+            const newDiv = document.createElement("div")
+            newDiv.className = "body"
+            newDiv.id = "no" + (bodyCountSeparate + 1)
+            newDiv.style.top = one.style.top // the reason is that before maka move, dria sa siya magtago
+            newDiv.style.left = one.style.left
+            bodyCountSeparate++
+            list.appendChild(newDiv)
+            bodyCount = document.querySelectorAll(".body") // brayta nako uy
         }
 
         function rePositionFood() {
