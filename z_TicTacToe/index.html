@@ -32,6 +32,105 @@
     </div>
 </body>
 
-<script src="index.js"></script>
+<!-- <script src="index.js"></script> // for learning only diff approach, professional-->
+ <script>
+    const boxes = document.querySelectorAll(".column")
+    let color = ""
+    let changer = 0
+
+        boxes.forEach( box => {
+        box.addEventListener("click", function() {
+                if (box.style.backgroundColor === comparison.style.backgroundColor) { 
+                // this if, make the click wont work if its already played/not white/default
+                color = changer === 0 ? "blue" : "red"
+                changer = 1 - changer //flips 1 and 0
+                box.style.backgroundColor = color
+                }
+                checkWinner()
+            })
+        })
+
+        const winner = document.querySelector("#winner")
+    const comparison = document.querySelector("#table")
+
+    const r1c1 = document.querySelector("#r1c1")
+    const r1c2 = document.querySelector("#r1c2")
+    const r1c3 = document.querySelector("#r1c3")
+
+    const r2c1 = document.querySelector("#r2c1")
+    const r2c2 = document.querySelector("#r2c2")
+    const r2c3 = document.querySelector("#r2c3")
+
+    const r3c1 = document.querySelector("#r3c1")
+    const r3c2 = document.querySelector("#r3c2")
+    const r3c3 = document.querySelector("#r3c3")
+
+    function checkWinner() {
+        // ROWS
+        // console.log(r1c1) // actually ang div tag<> iya e print with this id
+        if (r1c1.style.backgroundColor === r1c2.style.backgroundColor
+        && r1c1.style.backgroundColor === r1c3.style.backgroundColor
+        && r1c1.style.backgroundColor !== comparison.style.backgroundColor) {
+            console.log(`winner: ${r1c1.style.backgroundColor}`)
+            winner.style.color = r1c1.style.backgroundColor
+
+        }
+        if (r2c1.style.backgroundColor === r2c2.style.backgroundColor
+        && r2c1.style.backgroundColor === r2c3.style.backgroundColor
+        && r2c1.style.backgroundColor !== comparison.style.backgroundColor) {
+            console.log(`winner: ${r2c1.style.backgroundColor}`)
+            winner.style.color = r2c1.style.backgroundColor
+        }
+        if (r3c1.style.backgroundColor === r3c2.style.backgroundColor
+        && r3c1.style.backgroundColor === r3c3.style.backgroundColor
+        && r3c1.style.backgroundColor !== comparison.style.backgroundColor) {
+            console.log(`winner: ${r3c1.style.backgroundColor}`)
+            winner.style.color = r3c1.style.backgroundColor
+        }
+
+        // COLUMNS
+        if (r1c1.style.backgroundColor === r2c1.style.backgroundColor
+        && r1c1.style.backgroundColor === r3c1.style.backgroundColor
+        && r1c1.style.backgroundColor !== comparison.style.backgroundColor) {
+            console.log(`winner: ${r3c1.style.backgroundColor}`)
+            winner.style.color = r1c1.style.backgroundColor
+        }
+        if (r1c2.style.backgroundColor === r2c2.style.backgroundColor
+        && r1c2.style.backgroundColor === r3c2.style.backgroundColor
+        && r1c2.style.backgroundColor !== comparison.style.backgroundColor) {
+            console.log(`winner: ${r3c2.style.backgroundColor}`)
+            winner.style.color = r1c2.style.backgroundColor
+        }
+        if (r1c3.style.backgroundColor === r2c3.style.backgroundColor
+        && r1c3.style.backgroundColor === r3c3.style.backgroundColor
+        && r1c3.style.backgroundColor !== comparison.style.backgroundColor) {
+            console.log(`winner: ${r3c3.style.backgroundColor}`)
+            winner.style.color = r1c3.style.backgroundColor
+        }
+
+        // CROSS
+        if (r1c1.style.backgroundColor === r2c2.style.backgroundColor
+        && r1c1.style.backgroundColor === r3c3.style.backgroundColor
+        && r3c3.style.backgroundColor !== comparison.style.backgroundColor) {
+            console.log(`winner: ${r1c1.style.backgroundColor}`)
+            winner.style.color = r1c1.style.backgroundColor
+        }
+        if (r1c3.style.backgroundColor === r2c2.style.backgroundColor
+        && r1c3.style.backgroundColor === r3c1.style.backgroundColor
+        && r1c3.style.backgroundColor !== comparison.style.backgroundColor) {
+            console.log(`winner: ${r1c3.style.backgroundColor}`)
+            winner.style.color = r1c3.style.backgroundColor
+        }
+
+        // balcked the remaining white box so it will no longer be clickable
+        if (winner.style.color !== comparison.style.backgroundColor) {
+            boxes.forEach(box => {
+                if (box.style.backgroundColor === comparison.style.backgroundColor) {
+                    box.style.backgroundColor = "black"
+                }
+            })
+        }
+    }
+ </script>
 
 </html>
