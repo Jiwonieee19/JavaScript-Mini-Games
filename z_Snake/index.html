@@ -77,6 +77,7 @@
         };
 
         function gameOverChecker() {
+            // if touches the border of x and y, dynamically since we have innerXY function
             if (xy === "x" && 
                 (parseInt(getComputedStyle(head).top) > window.innerHeight 
                 || parseInt(getComputedStyle(head).top) < 0)) {
@@ -90,7 +91,27 @@
                     clearInterval(gameLoop) // ends the interval
                     document.getElementById("hide").style.display = "flex"
                 }
+                // if touches the body itself
+                else if (headTouchesBody()) {
+                    console.log("GAME OVER")
+                    clearInterval(gameLoop) // ends the interval
+                    document.getElementById("hide").style.display = "flex"
+                }
         };
+
+        function headTouchesBody() {
+            for (let j = 1; j < (bodyCountSeparate + 1); j++) {
+                console.log("BODY COUNT: " + bodyCountSeparate)
+                let bodyHere = document.getElementById("no" + j)
+                if (getComputedStyle(head).top < (getComputedStyle(bodyHere).top + getComputedStyle(bodyHere).height) &&
+                (getComputedStyle(head).top + getComputedStyle(head).height) > getComputedStyle(bodyHere).top &&
+                getComputedStyle(head).left < (getComputedStyle(bodyHere).left + getComputedStyle(bodyHere).width) &&
+                (getComputedStyle(head).left + getComputedStyle(head).width) > getComputedStyle(bodyHere).left) {
+                    return true
+                }
+            }
+            return false
+        }
 
         function foodFunction() {
             if (foodCollision()) {
