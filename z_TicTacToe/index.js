@@ -122,3 +122,6 @@ function blockUnplayedCells() {
 // - Draw detection via board.every()
 // - gameOver guard prevents clicks after game ends
 // - Source-of-truth pattern — state updates first, DOM reflects it second
+
+//   Session   TicTacToe inline vs index.js comparison
+//   Continue  opencode -s ses_0d92eda83ffeHJ55Z49SW0PGzG
