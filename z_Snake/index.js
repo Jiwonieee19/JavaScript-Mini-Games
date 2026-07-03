@@ -89,7 +89,7 @@ function spawnFood() {
     onSnake = state.snake.some(
       seg => seg.x === newFood.x && seg.y === newFood.y
     );
-  } while (onSnake);
+  } while (onSnake); // good loop btw AHAHAH waw, if true nga naa sa body, mag usab
   state.food = newFood;
 }
 
@@ -275,3 +275,6 @@ document.addEventListener("keydown", (e) => {
   is simpler for a turn‑based grid game like this.
 */
 setInterval(gameLoop, 150);
+
+// Session Snake: index.js vs index.html aspects and size
+// Continue opencode -s ses_0dc0e30a7ffeYl30S6Lc6brt5G
