@@ -2,6 +2,7 @@ DOM
 
 | Syntax                                      | What it Does                                        |
 | ------------------------------------------- | --------------------------------------------------- |
+| `document                                   | The root object of the DOM.                         |
 | `document.getElementById(id)`               | Finds an HTML element by its `id`.                  |
 | `document.querySelector(selector)`          | Finds the first element matching a CSS selector.    |
 | `document.querySelectorAll(selector)`       | Finds all matching elements and returns a NodeList. |
@@ -34,3 +35,81 @@ Yes, basically all standard CSS properties work with .style in JS. Multi-word pr
 - border-radius → borderRadius
 Single-word ones stay the same: color, width, height, display, etc.
 The only exceptions are vendor-prefixed properties like -webkit-transform, which become WebkitTransform (capital W).
+
+JAVASWING = CANVAS HTML
+
+| Java                              | HTML                                                             |
+| --------------------------------- | ---------------------------------------------------------------- |
+| `Graphics g`                      | `CanvasRenderingContext2D ctx`                                   |
+| `paintComponent(Graphics g)`      | Main drawing function (you draw manually using `ctx`)            |
+| `g.setColor(Color.RED)`           | `ctx.fillStyle = "red"` or `ctx.strokeStyle = "red"`             |
+| `g.fillRect(x, y, w, h)`          | `ctx.fillRect(x, y, w, h)`                                       |
+| `g.drawRect(x, y, w, h)`          | `ctx.strokeRect(x, y, w, h)`                                     |
+| `g.drawLine(x1, y1, x2, y2)`      | `ctx.beginPath()`, `ctx.moveTo()`, `ctx.lineTo()`,`ctx.stroke()` |
+| `g.drawOval(x, y, w, h)`          | `ctx.beginPath()`, `ctx.arc()`, `ctx.stroke()`                   |
+| `g.fillOval(x, y, w, h)`          | `ctx.beginPath()`, `ctx.arc()`, `ctx.fill()`                     |
+| `g.drawString(text, x, y)`        | `ctx.fillText(text, x, y)`                                       |
+| `g.drawImage(image, x, y)`        | `ctx.drawImage(image, x, y)`                                     |
+| `g.setFont(font)`                 | `ctx.font = "20px Arial"`                                        |
+| `repaint()`                       | `requestAnimationFrame()` or manually redraw                     |
+| `Graphics2D`                      | `CanvasRenderingContext2D`                                       |
+| `JPanel` (drawing surface)        | `<canvas>`                                                       |
+| `Graphics g` provided by Swing    | `canvas.getContext("2d")` returns the drawing context            |
+| `g.clearRect()` (`Graphics2D`)    | `ctx.clearRect(x, y, w, h)`                                      |
+
+JS ARRAY
+
+| Iteration Method       | Description                                                       |
+| ---------------------- | ----------------------------------------------------------------- |
+| `array.map()`          | Transforms every element and returns a new array.                 |
+| `array.filter()`       | Returns new array containing only elements that match condition.  |
+| `array.find()`         | Returns the first element that matches a condition.               |
+| `array.findIndex()`    | Returns the index of the first element that matches a condition.  |
+| `array.forEach()`      | Executes a function for every element in the array.               |
+| `array.some()`         | Returns `true` if at least one element matches a condition.       |
+| `array.every()`        | Returns `true` if all elements match a condition.                 |
+| `array.reduce()`       | Reduces all elements into a single value.                         |
+
+| Add & Remove Method    | Description                                                       |
+| ---------------------- | ----------------------------------------------------------------- |
+| `array.push()`         | Adds one or more elements to the end of the array.                |
+| `array.pop()`          | Removes and returns the last element of the array.                |
+| `array.unshift()`      | Adds one or more elements to the beginning of the array.          |
+| `array.shift()`        | Removes and returns the first element of the array.               |
+| `array.splice()`       | Adds, removes, or replaces elements in the original array.        |
+| `array.slice()`        | Returns a copy of a portion of the array.                         |
+
+| Searching Method       | Description                                                       |
+| ---------------------- | ----------------------------------------------------------------- |
+| `array.includes()`     | Returns `true` if the array contains a specified value.           |
+| `array.indexOf()`      | Returns the first index of a specified value.                     |
+| `array.lastIndexOf()`  | Returns the last index of a specified value.                      |
+| `array.findIndex()`    | Returns the index of the first element that matches a condition.  |
+
+| Sorting Method         | Description                                                       |
+| ---------------------- | ----------------------------------------------------------------- |
+| `array.sort()`         | Sorts the elements of the original array.                         |
+| `array.reverse()`      | Reverses the order of the original array.                         |
+| `array.toSorted()`     | Returns a sorted copy without modifying the original array.       |
+| `array.toReversed()`   | Returns a reversed copy without modifying the original array.     |
+
+| Joining Method         | Description                                                       |
+| ---------------------- | ----------------------------------------------------------------- |
+| `array.join()`         | Joins all elements into a string using a separator.               |
+| `array.toString()`     | Converts the array into a comma-separated string.                 |
+
+| Combining Method       | Description                                                       |
+| ---------------------- | ----------------------------------------------------------------- |
+| `array.concat()`       | Merges two or more arrays into a new array.                       |
+| `array.flat()`         | Flattens nested arrays into a single array.                       |
+| `array.flatMap()`      | Maps each element, then flattens the result by one level.         |
+
+| Creation Method        | Description                                                       |
+| ---------------------- | ----------------------------------------------------------------- |
+| `Array.from()`         | Creates a new array from an iterable or array-like object.        |
+| `Array.of()`           | Creates a new array from the given arguments.                     |
+| `array.fill()`         | Fills all or part of an array with a specified value.             |
+
+| Checking Method        | Description                                                       |
+| ---------------------- | ----------------------------------------------------------------- |
+| `Array.isArray()`      | Returns `true` if the value is an array; otherwise `false`.       |
