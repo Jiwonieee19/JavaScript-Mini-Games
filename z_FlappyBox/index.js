@@ -14,4 +14,6 @@ const state = {
     running: false
 }
 
+// :> nagdalaw ka fletchy
+
 console.log(state.obstacles[0].x2)
