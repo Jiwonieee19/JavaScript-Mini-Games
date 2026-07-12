@@ -9,11 +9,12 @@ const TILE_COUNT = canvas.width / GRID_SIZE
 const state = {
     obstacles: [
         // {x1: 20, x2: state.obstacles[0].x1 + 20}
-        {x1: 20, x2: 70} // 2 blocks = 50px, 1tile means 25x25, x1(20) + 2tile gap(50) = x2 = 70
+        {x1: 20, x2: 70}, // 2 blocks = 50px, 1tile means 25x25, x1(20) + 2tile gap(50) = x2 = 70
+        {x1: 30, x2: 80},
+        {x1: 10, x2: 60},
+        {x1: 40, x2: 90},
     ],
     running: false
 }
-
-// :> nagdalaw ka fletchy
 
 console.log(state.obstacles[0].x2)
