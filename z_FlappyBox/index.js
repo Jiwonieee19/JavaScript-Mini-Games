@@ -8,6 +8,9 @@ const scoreEl = document.querySelector(".score")
 const GRID_SIZE = 20
 const TILE_COUNT = canvas.width / GRID_SIZE
 
+const min = 70 // 70 start
+const max = 320 // 320 lang cause 320 + bird gap = 430, 500 - 430 = 70 max gap sa ground
+
 const state = {
     birdbox: [
         {x: 40, y: 40}
@@ -16,8 +19,8 @@ const state = {
         // {x1: 20, x2: state.obstacles[0].x1 + 20}
         {x: 200}, // 2 blocks = 50px, 1tile means 25x25, x(20) + 2tile gap(50) = x2 = 70
         {x: 300},
-        {x: 100},
-        {x: 350},
+        {x: 80},
+        {x: 320},
     ],
     running: false,
     score: 0,
@@ -49,20 +52,20 @@ console.log(state.obstacles[0].x2)
             // top obstacle
             ctx.fillStyle = "#04fd00"
             ctx.fillRect(
-                // i times 100 (50 for width, 60 for gap) + starting gap
-                (i * 110) + 140,
+                // i times 100 (60 for width, 90 for gap) + starting gap
+                (i * 150) + 140,
                 0,
-                40,
+                60,
                 coor.x,
             )
 
             // bottom obstacle
             ctx.fillStyle = "#c08585"
             ctx.fillRect(
-                (i * 110) + 140,
-                // the + 90 is the gap for bird
-                coor.x + 90,
-                40,
+                (i * 150) + 140,
+                // the + 100 is the gap for bird
+                coor.x + 110,
+                60,
                 canvas.height,
             )
         })
