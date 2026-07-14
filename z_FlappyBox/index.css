@@ -5,3 +5,12 @@
     background-color: aqua;
     justify-content: center;
 }
+
+.score {
+    margin-left: 50px;
+    margin-top: 30px;
+}
+
+#game {
+    margin: 20px 0px 0px 50px;
+}
