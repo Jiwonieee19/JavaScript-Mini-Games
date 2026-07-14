@@ -8,8 +8,11 @@ const scoreEl = document.querySelector(".score")
 const GRID_SIZE = 20
 const TILE_COUNT = canvas.width / GRID_SIZE
 
-const min = 70 // 70 start
-const max = 320 // 320 lang cause 320 + bird gap = 430, 500 - 430 = 70 max gap sa ground
+const minimum = 70 // 70 start
+const maximum = 320 // 320 lang cause 320 + bird gap = 430, 500 - 430 = 70 max gap sa ground
+
+let addAndPopController = 6
+let runningGap = 140
 
 const state = {
     birdbox: [
@@ -38,9 +41,22 @@ console.log(state.obstacles[0].x2)
         scoreEl.textContent = "Obstacle Passed: " + state.score
     }
 
+    function addAndPop() {
+        // pra dli per frame/interval mag add and pop since it will result to exponential ahead obstacle
+        if (addAndPopController === 0) {
+            const toAdd = randInt(minimum, maximum)
+            state.obstacles.push({x: toAdd})
+            addAndPopController = 6
+        } else {
+            addAndPopController -= 1
+        }
+
+        console.log(state.obstacles.length)
+    }
+
     function move() {
         console.log("checking the fps")
-
+        runningGap -= (1000 / 60) // 60 fps
     }
 
     function draw() {
@@ -55,7 +71,8 @@ console.log(state.obstacles[0].x2)
             ctx.fillStyle = "#04fd00"
             ctx.fillRect(
                 // i times 100 (60 for width, 90 for gap) + starting gap
-                (i * 150) + 140,
+                // (i * 150) + 140,
+                (i * 150) + runningGap,
                 0,
                 60,
                 coor.x,
@@ -64,7 +81,7 @@ console.log(state.obstacles[0].x2)
             // bottom obstacle
             ctx.fillStyle = "#c08585"
             ctx.fillRect(
-                (i * 150) + 140,
+                (i * 150) + runningGap,
                 // the + 100 is the gap for bird
                 coor.x + 110,
                 60,
@@ -74,12 +91,18 @@ console.log(state.obstacles[0].x2)
 
         // Draw box only for the game
         ctx.fillStyle = "#0000ff15"
-        ctx.fillRect(500,0,400,600)
+        ctx.fillRect(500,0,700,600)
     }
 
     function gameLoop() {
         move()
+        addAndPop()
         draw()
     }
 
-    setInterval(gameLoop, 200)
+    // trigger for running
+    if (state.running) {
+        setInterval(gameLoop, 200)
+    } else {
+        draw()
+    }
