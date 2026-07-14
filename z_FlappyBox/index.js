@@ -21,6 +21,7 @@ const state = {
         {x: 300},
         {x: 80},
         {x: 320},
+        {x: 120},
     ],
     running: false,
     score: 0,
@@ -38,6 +39,7 @@ console.log(state.obstacles[0].x2)
     }
 
     function move() {
+        console.log("checking the fps")
 
     }
 
@@ -69,6 +71,15 @@ console.log(state.obstacles[0].x2)
                 canvas.height,
             )
         })
+
+        // Draw box only for the game
+        ctx.fillStyle = "#0000ff15"
+        ctx.fillRect(500,0,400,600)
     }
 
-    draw()
+    function gameLoop() {
+        move()
+        draw()
+    }
+
+    setInterval(gameLoop, 200)
