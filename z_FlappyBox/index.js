@@ -59,7 +59,10 @@ console.log(state.obstacles[0].x2)
             }
             // state.obstacles.shift() // pop/remove hehe pop means last sa array to delete so not pop
             // diz dont work, mo balhin ug index, mo sibog visually, so e null nlng value ni array
-            state.obstacles[indexToPop].x = null // ani nlng pro ang array exponential na ang size
+            // state.obstacles[indexToPop].x = null // ani nlng pro ang array exponential na ang size
+            state.obstacles.shift()
+            runningGap += 190 // nawala gid stutter effect hahaha im so brayt (self glaze)
+            state.score++
             indexToPop++
             addAndPopController = 12
         } else {
@@ -73,7 +76,7 @@ console.log(state.obstacles[0].x2)
         console.log("checking the fps")
         runningGap -= (1000 / 60) // 60 fps
         scoreEl.textContent = "Obstacle Passed: " + state.score
-        state.score = state.obstacles.filter(obs => obs.x === null).length
+        // state.score = state.obstacles.filter(obs => obs.x === null).length
     }
 
     // DAPAT NAAY VELOCITY DROP, SAME SA JAVASWING FLAPPY
@@ -81,6 +84,17 @@ console.log(state.obstacles[0].x2)
         // state.birdbox[0].y -= 30
         state.birdbox[0].y += downfall
         downfall += 6 // velocity drops until space ulit
+    }
+
+    function collision() {
+        let a = state.obstacles
+        let b = state.birdbox
+
+        // instead of all obstacles e check dri, dapat ang next sa null lang
+        // thats sounds a good plan, however mo dghn ghpon ang array, now my plan
+        // is when we remove/shift obstacle that already passed, mag add gap sa harap 
+        // pra dli amg stutter effect and mka normal forloop rta dri
+
     }
 
     function draw() {
@@ -122,6 +136,9 @@ console.log(state.obstacles[0].x2)
                 GRID_SIZE,
                 GRID_SIZE,
             )
+
+            // i should draw the up sprite and downfall sprite for box so it will be ready for
+            // true bird, but not this time, its just for practice, ill slay more in my intended Game using Canvas JS
         })
 
         // Draw box only for the game
@@ -134,6 +151,7 @@ console.log(state.obstacles[0].x2)
         move()
         addAndPop()
         draw()
+        collision()
     }
 
     // Initial Draw
