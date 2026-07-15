@@ -11,8 +11,11 @@ const TILE_COUNT = canvas.width / GRID_SIZE
 const minimum = 70 // 70 start
 const maximum = 320 // 320 lang cause 320 + bird gap = 430, 500 - 430 = 70 max gap sa ground
 
-let addAndPopController = 6
+let addAndPopController = 10
 let runningGap = 140
+let indexToPop = 0
+let additionalAdd = 3
+
 
 const state = {
     birdbox: [
@@ -46,7 +49,19 @@ console.log(state.obstacles[0].x2)
         if (addAndPopController === 0) {
             const toAdd = randInt(minimum, maximum)
             state.obstacles.push({x: toAdd})
-            addAndPopController = 6
+            // kaduha mag add every 3 times (since sa pang 3 last before maapsan sa speed)
+            if (additionalAdd === 0) {
+                const toAdd2 = randInt(minimum, maximum)
+                state.obstacles.push({x: toAdd2})
+                additionalAdd = 3
+            } else {
+                additionalAdd -= 1
+            }
+            // state.obstacles.shift() // pop/remove hehe pop means last sa array to delete so not pop
+            // diz dont work, mo balhin ug index, mo sibog visually, so e null nlng value ni array
+            state.obstacles[indexToPop].x = null // ani nlng pro ang array exponential na ang size
+            indexToPop++
+            addAndPopController = 10
         } else {
             addAndPopController -= 1
         }
@@ -80,13 +95,15 @@ console.log(state.obstacles[0].x2)
 
             // bottom obstacle
             ctx.fillStyle = "#c08585"
-            ctx.fillRect(
+            if (coor.x !== null) { // pra if ma null na, dli na mag draw ug sa ubos nga obs
+                ctx.fillRect(
                 (i * 150) + runningGap,
                 // the + 100 is the gap for bird
                 coor.x + 110,
                 60,
                 canvas.height,
-            )
+                )
+            }
         })
 
         // Draw box only for the game
