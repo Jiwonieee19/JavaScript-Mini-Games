@@ -11,15 +11,16 @@ const TILE_COUNT = canvas.width / GRID_SIZE
 const minimum = 70 // 70 start
 const maximum = 320 // 320 lang cause 320 + bird gap = 430, 500 - 430 = 70 max gap sa ground
 
-let addAndPopController = 10
+let addAndPopController = 12
 let runningGap = 140
 let indexToPop = 0
 let additionalAdd = 3
+let downfall = 16
 
 
 const state = {
     birdbox: [
-        {x: 40, y: 40}
+        {x: 20, y: 100}
     ],
     obstacles: [
         // {x1: 20, x2: state.obstacles[0].x1 + 20}
@@ -60,7 +61,7 @@ console.log(state.obstacles[0].x2)
             // diz dont work, mo balhin ug index, mo sibog visually, so e null nlng value ni array
             state.obstacles[indexToPop].x = null // ani nlng pro ang array exponential na ang size
             indexToPop++
-            addAndPopController = 10
+            addAndPopController = 12
         } else {
             addAndPopController -= 1
         }
@@ -73,6 +74,13 @@ console.log(state.obstacles[0].x2)
         runningGap -= (1000 / 60) // 60 fps
         scoreEl.textContent = "Obstacle Passed: " + state.score
         state.score = state.obstacles.filter(obs => obs.x === null).length
+    }
+
+    // DAPAT NAAY VELOCITY DROP, SAME SA JAVASWING FLAPPY
+    function birdMove() {
+        // state.birdbox[0].y -= 30
+        state.birdbox[0].y += downfall
+        downfall += 6 // velocity drops until space ulit
     }
 
     function draw() {
@@ -88,7 +96,7 @@ console.log(state.obstacles[0].x2)
             ctx.fillRect(
                 // i times 100 (60 for width, 90 for gap) + starting gap
                 // (i * 150) + 140,
-                (i * 150) + runningGap,
+                (i * 190) + runningGap,
                 0,
                 60,
                 coor.x,
@@ -98,13 +106,22 @@ console.log(state.obstacles[0].x2)
             ctx.fillStyle = "#c08585"
             if (coor.x !== null) { // pra if ma null na, dli na mag draw ug sa ubos nga obs
                 ctx.fillRect(
-                (i * 150) + runningGap,
+                (i * 190) + runningGap,
                 // the + 100 is the gap for bird
-                coor.x + 110,
+                coor.x + 120,
                 60,
                 canvas.height,
                 )
             }
+
+            // birdbox
+            ctx.fillStyle = "#240027"
+            ctx.fillRect(
+                state.birdbox[0].x,
+                state.birdbox[0].y,
+                GRID_SIZE,
+                GRID_SIZE,
+            )
         })
 
         // Draw box only for the game
@@ -113,6 +130,7 @@ console.log(state.obstacles[0].x2)
     }
 
     function gameLoop() {
+        birdMove()
         move()
         addAndPop()
         draw()
@@ -126,6 +144,8 @@ console.log(state.obstacles[0].x2)
         let isSpaceBar = false
         if (event.code === 'Space') {
             isSpaceBar = true
+            state.birdbox[0].y -= 42 // since kda space rmn siya mo up, diri nlng ni
+            downfall = 16 // reset veolcity drop
         }
 
         if (!state.running && isSpaceBar) {
