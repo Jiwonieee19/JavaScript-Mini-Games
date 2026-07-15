@@ -41,7 +41,6 @@ console.log(state.obstacles[0].x2)
 
     function startGame() {
         state.running = true
-        scoreEl.textContent = "Obstacle Passed: " + state.score
     }
 
     function addAndPop() {
@@ -72,6 +71,8 @@ console.log(state.obstacles[0].x2)
     function move() {
         console.log("checking the fps")
         runningGap -= (1000 / 60) // 60 fps
+        scoreEl.textContent = "Obstacle Passed: " + state.score
+        state.score = state.obstacles.filter(obs => obs.x === null).length
     }
 
     function draw() {
@@ -122,7 +123,12 @@ console.log(state.obstacles[0].x2)
 
     // Listener Draft and Trigger Game
     document.addEventListener("keydown", (e) => {
-        if (!state.running) {
+        let isSpaceBar = false
+        if (event.code === 'Space') {
+            isSpaceBar = true
+        }
+
+        if (!state.running && isSpaceBar) {
             setInterval(gameLoop, 200)
             state.running = true
             return

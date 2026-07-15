@@ -6,11 +6,17 @@
     justify-content: center;
 }
 
-.score {
-    margin-left: 50px;
-    margin-top: 30px;
+.instruction {
+    margin-right: 110px;
 }
 
 #game {
     margin: 20px 0px 0px 50px;
+}
+
+.holder {
+    display: flex;
+    flex-direction: row;
+    margin-left: 50px;
+    margin-top: 30px;
 }
