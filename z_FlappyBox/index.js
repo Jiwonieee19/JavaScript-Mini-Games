@@ -100,9 +100,14 @@ console.log(state.obstacles[0].x2)
         draw()
     }
 
-    // trigger for running
-    if (state.running) {
-        setInterval(gameLoop, 200)
-    } else {
-        draw()
-    }
+    // Initial Draw
+    draw()
+
+    // Listener Draft and Trigger Game
+    document.addEventListener("keydown", (e) => {
+        if (!state.running) {
+            setInterval(gameLoop, 200)
+            state.running = true
+            return
+        }
+    })
