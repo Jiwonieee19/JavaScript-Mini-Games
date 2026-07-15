@@ -24,11 +24,11 @@ const state = {
     ],
     obstacles: [
         // {x1: 20, x2: state.obstacles[0].x1 + 20}
-        {x: 200}, // 2 blocks = 50px, 1tile means 25x25, x(20) + 2tile gap(50) = x2 = 70
-        {x: 300},
-        {x: 80},
-        {x: 320},
-        {x: 120},
+        {x: 200, y: null}, // 2 blocks = 50px, 1tile means 25x25, x(20) + 2tile gap(50) = x2 = 70
+        {x: 300, y: null},
+        {x: 80, y: null},
+        {x: 320, y: null},
+        {x: 120, y: null},
     ],
     running: false,
     score: 0,
@@ -48,11 +48,11 @@ console.log(state.obstacles[0].x2)
         // pra dli per frame/interval mag add and pop since it will result to exponential ahead obstacle
         if (addAndPopController === 0) {
             const toAdd = randInt(minimum, maximum)
-            state.obstacles.push({x: toAdd})
+            state.obstacles.push({x: toAdd, y: null})
             // kaduha mag add every 3 times (since sa pang 3 last before maapsan sa speed)
             if (additionalAdd === 0) {
                 const toAdd2 = randInt(minimum, maximum)
-                state.obstacles.push({x: toAdd2})
+                state.obstacles.push({x: toAdd2, y: null})
                 additionalAdd = 3
             } else {
                 additionalAdd -= 1
@@ -75,6 +75,10 @@ console.log(state.obstacles[0].x2)
     function move() {
         console.log("checking the fps")
         runningGap -= (1000 / 60) // 60 fps
+        state.obstacles.forEach((coor, i) => {
+            // console.log("NULL BA? " + coor.y)
+            coor.y -= (1000 / 60)
+        })
         scoreEl.textContent = "Obstacle Passed: " + state.score
         // state.score = state.obstacles.filter(obs => obs.x === null).length
     }
@@ -95,6 +99,17 @@ console.log(state.obstacles[0].x2)
         // is when we remove/shift obstacle that already passed, mag add gap sa harap 
         // pra dli amg stutter effect and mka normal forloop rta dri
 
+        for (let i = 0; i < state.obstacles.length; i++) {
+            if (a[i].y < (b[0].x + GRID_SIZE) && // si x pala ay ang dynamic computation sa draw
+                b[0].x < (a[i].y + 60) &&
+                a[i].x > (b[0].y + GRID_SIZE) &&
+                b[0].y < a[i].x) {// since height gamit ang coor x eh
+                    document.querySelector(".instruction").textContent = "YAWA NABALI PAGSTART UG CODE"
+            }
+        }
+        if (b[0].y < 0) {
+            document.querySelector(".instruction").textContent = "NALAPAS SA ATOP"
+        }
     }
 
     function draw() {
@@ -127,6 +142,9 @@ console.log(state.obstacles[0].x2)
                 canvas.height,
                 )
             }
+
+            // adding the y that shouldhavebeen the x
+            coor.y = (i * 190) + runningGap
 
             // birdbox
             ctx.fillStyle = "#240027"
@@ -172,3 +190,6 @@ console.log(state.obstacles[0].x2)
             return
         }
     })
+
+    // Session   z_flappybox collision if not executed
+    // Continue  opencode -s ses_09b054d8bffecRMBRffhOgmc72
