@@ -100,11 +100,21 @@ console.log(state.obstacles[0].x2)
         // pra dli amg stutter effect and mka normal forloop rta dri
 
         for (let i = 0; i < state.obstacles.length; i++) {
+            // TOP OBSTACLE
             if (a[i].y < (b[0].x + GRID_SIZE) && // si x pala ay ang dynamic computation sa draw
                 b[0].x < (a[i].y + 60) &&
-                a[i].x > (b[0].y + GRID_SIZE) &&
+                // a[i].x > (b[0].y + GRID_SIZE) &&
                 b[0].y < a[i].x) {// since height gamit ang coor x eh
                     document.querySelector(".instruction").textContent = "YAWA NABALI PAGSTART UG CODE"
+            }
+
+            // BOTTOM OBSTACLE
+            else if (a[i].y < (b[0].x + GRID_SIZE) && // si x pala ay ang dynamic computation sa draw
+                b[0].x < (a[i].y + 60) &&
+                (a[i].x + 120) < (b[0].y + GRID_SIZE) 
+                // && b[0].y > (a[i].x + 120)
+            ) {// since height gamit ang coor x eh
+                    document.querySelector(".instruction").textContent = "BOTTOM PART NASANGIT"
             }
         }
         if (b[0].y < 0) {
