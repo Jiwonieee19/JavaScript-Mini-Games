@@ -16,6 +16,7 @@ let runningGap = 140
 let indexToPop = 0
 let additionalAdd = 3
 let downfall = 16
+let gameInterval
 
 
 const state = {
@@ -106,6 +107,9 @@ console.log(state.obstacles[0].x2)
                 // a[i].x > (b[0].y + GRID_SIZE) &&
                 b[0].y < a[i].x) {// since height gamit ang coor x eh
                     document.querySelector(".instruction").textContent = "YAWA NABALI PAGSTART UG CODE"
+                    state.running = false
+                    clearInterval(gameInterval)
+                    // draw()
             }
 
             // BOTTOM OBSTACLE
@@ -115,6 +119,9 @@ console.log(state.obstacles[0].x2)
                 // && b[0].y > (a[i].x + 120)
             ) {// since height gamit ang coor x eh
                     document.querySelector(".instruction").textContent = "BOTTOM PART NASANGIT"
+                    state.running = false
+                    clearInterval(gameInterval)
+                    // draw()
             }
         }
         if (b[0].y < 0) {
@@ -195,7 +202,8 @@ console.log(state.obstacles[0].x2)
         }
 
         if (!state.running && isSpaceBar) {
-            setInterval(gameLoop, 200)
+            clearInterval(gameInterval) // prevent stacking
+            gameInterval = setInterval(gameLoop, 200)
             state.running = true
             return
         }
